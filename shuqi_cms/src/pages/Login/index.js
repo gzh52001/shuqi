@@ -1,6 +1,7 @@
 import React from "react"
-import { Form, Input, Button, Checkbox } from "antd"
+import { Form, Input, Button } from "antd"
 import "./Login.css"
+import { login } from "./../../api"
 class Login extends React.Component {
     formRef = React.createRef();
     constructor() {
@@ -28,6 +29,9 @@ class Login extends React.Component {
         let { username, password } = this.state
         if (username && password) {
             console.log(1)
+            login(username, password).then(res => {
+                console.log(res)
+            })
         }
 
     }
