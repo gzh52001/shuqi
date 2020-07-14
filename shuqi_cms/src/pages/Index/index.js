@@ -1,14 +1,14 @@
 import React from "react"
 import { withLogin } from "../../utils/Hoc"
 import "./Index.css"
-import { withRouter, Route, Redirect, Switch } from "react-router-dom"
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Route, Redirect, Switch } from "react-router-dom"
+import { Layout, Menu } from 'antd';
 import { ProjectOutlined, BookOutlined, CloudUploadOutlined, UsergroupAddOutlined, LogoutOutlined } from '@ant-design/icons';
 import NewBook from "./NewBook"
 import Story from "./Story"
 import Users from "./Users"
 import Section from "./Section"
-import http, { request } from "./../../utils/http"
+import axios from "./../../utils/request"
 class Index extends React.Component {
     constructor() {
         super()
@@ -18,9 +18,7 @@ class Index extends React.Component {
     }
     handleClick = e => {
         console.log('click ', e.key);
-
         this.props.history.push(e.key)
-
     };
     async componentWillMount() {
         if (this.props.location.pathname == "/") {
@@ -35,13 +33,12 @@ class Index extends React.Component {
         // let datas = await fetch("http://www.nanshig.com/mobile/index.php?act=index").then(res => res.json())
         // console.log(datas)
 
-        const { datas } = await fetch('/login', {
-            mode: "cors",
-            method: "post",
-            body: JSON.stringify({
-                "username": '111', "password": "111"
-            })
-        }).then(response => response.json())
+        const datas = await axios.post('/login', {
+            username: "111", password: "111"
+        }).then(res => {
+            return res
+        })
+
         console.log(datas)
     }
     logout = () => {
@@ -105,6 +102,7 @@ class Index extends React.Component {
                                     <Route path="/index/story" component={Story}></Route>
                                     <Route path="/index/section" component={Section}></Route>
                                     <Route path="/index/newbook" component={NewBook}></Route>
+                                    <Redirect from="/index" to="index/story"></Redirect>
                                 </Switch>
                             </Content>
                         </Layout>
