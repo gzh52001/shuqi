@@ -9,6 +9,7 @@ import Story from "./Story"
 import Users from "./Users"
 import Section from "./Section"
 import axios from "./../../utils/request"
+import Nofind from "./../Nofind"
 class Index extends React.Component {
     constructor() {
         super()
@@ -102,7 +103,8 @@ class Index extends React.Component {
                                     <Route path="/index/story" component={Story}></Route>
                                     <Route path="/index/section" component={Section}></Route>
                                     <Route path="/index/newbook" component={NewBook}></Route>
-                                    <Redirect from="/index" to="index/story"></Redirect>
+                                    <Redirect from="/" to="index/story" exact></Redirect>
+                                    <Route component={Nofind} />
                                 </Switch>
                             </Content>
                         </Layout>
