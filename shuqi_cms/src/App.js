@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { withRouter, Route, Redirect, Switch, Result, Button } from "react-router-dom"
+import { withRouter, Route, Switch } from "react-router-dom"
 import Login from "./pages/Login/index"
 import Index from "./pages/Index/index"
 
