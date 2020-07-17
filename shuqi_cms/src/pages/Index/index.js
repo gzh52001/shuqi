@@ -4,7 +4,8 @@ import "./Index.css"
 import { Route, Redirect, Switch } from "react-router-dom"
 import { Layout, Menu } from 'antd';
 import { ProjectOutlined, BookOutlined, CloudUploadOutlined, UsergroupAddOutlined, LogoutOutlined } from '@ant-design/icons';
-import NewBook from "./NewBook"
+import store from "./../../store"
+
 import Story from "./Story"
 import Users from "./Users"
 import Section from "./Section"
@@ -34,13 +35,13 @@ class Index extends React.Component {
         // let datas = await fetch("http://www.nanshig.com/mobile/index.php?act=index").then(res => res.json())
         // console.log(datas)
 
-        const datas = await axios.post('/login', {
-            username: "111", password: "111"
-        }).then(res => {
-            return res
-        })
+        // const datas = await axios.post('/login', {
+        //     username: "111", password: "111"
+        // }).then(res => {
+        //     return res
+        // })
 
-        console.log(datas)
+        // console.log(datas)
     }
     logout = () => {
         localStorage.removeItem("shuqi_cms_token")
@@ -56,8 +57,8 @@ class Index extends React.Component {
                     <Header className="header">
                         <div>
                             <h1 style={{ width: "300px", display: "inline" }}> 小说管理系统</h1>
-                            <div style={{ width: "100px", display: "inline", float: "right", color: "#fff", fontSize: 14 }}>
-                                <span>欢迎：{this.props.username}</span>
+                            <div style={{ width: "150px", display: "inline", float: "right", color: "#fff", fontSize: 14 }}>
+                                <span>欢迎：{store.getState().user}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span onClick={this.logout}><LogoutOutlined />退出</span>
                             </div>
                         </div>
@@ -82,9 +83,7 @@ class Index extends React.Component {
                                 <Menu.Item key="/index/section" icon={<ProjectOutlined />}>
                                     章节更新
                           </Menu.Item>
-                                <Menu.Item key="/index/newbook" icon={<CloudUploadOutlined />}>
-                                    新书上架
-                          </Menu.Item>
+
                             </Menu>
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px', boxSizing: "border-box", height: '100%' }} mode="inline">
@@ -102,7 +101,6 @@ class Index extends React.Component {
                                     <Route path="/index/users" component={Users}></Route>
                                     <Route path="/index/story" component={Story}></Route>
                                     <Route path="/index/section" component={Section}></Route>
-                                    <Route path="/index/newbook" component={NewBook}></Route>
                                     <Redirect from="/" to="index/story" exact></Redirect>
                                     <Route component={Nofind} />
                                 </Switch>

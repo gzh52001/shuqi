@@ -1,0 +1,140 @@
+import React, { useState, useEffect } from "react"
+import { Modal, Form, Select, Input, Button, Upload, message, Checkbox } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, changetype }) => {
+    const { Option } = Select
+    const upload = {
+        name: 'file',
+
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+    const [info, setinfo] = useState(rowinfo)
+    useEffect(() => {
+        console.log(111)
+        setinfo(rowinfo)
+    }, [rowinfo])
+    const plainOptions = ['热血', '校园', '轻松', "爽文", "异能", "重生", "公主"];
+    const [form] = Form.useForm();
+    console.log((rowinfo))
+    return (
+        <Modal
+            visible={visible}
+            title="Create a new collection"
+            okText="提交"
+            cancelText="取消"
+            onCancel={onCancel}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then(values => {
+                        form.resetFields();
+                        onCreate(values);
+                    })
+                    .catch(info => {
+                        console.log('Validate Failed:', info);
+                    });
+
+            }}
+        >
+            <Form
+                form={form}
+                layout="vertical"
+                name="form_in_modal"
+                initialValues={{
+                    modifier: 'public',
+                }}
+            >
+                <Form.Item
+                    name="bookname"
+                    label="书名"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入书名',
+                        },
+
+                    ]}
+                    initialValue={info.Bookname}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="author"
+                    label="作者"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入作者姓名',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="category"
+                    label="类别"
+                    rules={[{
+                        required: true,
+                        message: "请选择小说分类"
+                    }]}
+                    initialValue="city">
+                    <Select >
+                        <Option value="city">都市</Option>
+                        <Option value="xuanhuan">玄幻</Option>
+                        <Option value="xianxia">仙侠</Option>
+                        <Option value="lingyi">灵异</Option>
+                        <Option value="lishi">历史</Option>
+                        <Option value="youxi">游戏</Option>
+                        <Option value="kehuan">科幻</Option>
+                        <Option value="wuxia">武侠</Option>
+                        <Option value="qihuan">奇幻</Option>
+                        <Option value="jingji">竞技</Option>
+                        <Option value="qita">其他</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    name="tags"
+                    label="标签"
+                    rules={[{
+                        required: true,
+                        message: "请选择小说标签"
+                    }]
+
+                    }
+                    initialValue="热血"
+                >
+                    <Checkbox.Group options={plainOptions} />
+                </Form.Item>
+
+                <Form.Item name="summary" label="概述" rules={[
+                    {
+                        required: true,
+                        message: '请输入概述',
+                    },
+                ]}>
+                    <Input.TextArea type="textarea" autoSize={true} />
+                </Form.Item>
+                <Form.Item label="小说封面" rules={[{ required: true, message: "请选择小说封面图片" }]}>
+                    <Upload {...upload}>
+                        <Button>
+                            <UploadOutlined /> Click to Upload
+                </Button>
+                    </Upload>
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+};

@@ -30,7 +30,12 @@ class Login extends React.Component {
         if (username && password) {
             console.log(1)
             login(username, password).then(res => {
-                console.log(res)
+                if (res.code == 200) {
+                    console.log(res)
+                    localStorage.setItem("shuqi_cms", res.data.token)
+                    localStorage.setItem("shuqi_cms_user", username)
+                    this.props.history.push("/")
+                }
             })
         }
 

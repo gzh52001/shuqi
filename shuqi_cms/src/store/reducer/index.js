@@ -1,7 +1,8 @@
 
 const initialState = {
     logined: false,
-    token: "111"
+    token: localStorage.getItem("shuqi_cms"),
+    user: localStorage.getItem("shuqi_cms_user")
 }
 
 export default (state = initialState, { type, payload }) => {
