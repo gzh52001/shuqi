@@ -1,157 +1,287 @@
-import React from "react"
-import { Input, Select, Divider, Pagination, Table, Tag, Space, Button } from "antd"
-import { search, init, } from "./../../../api"
-class Story extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            list: "",
-            search_info: "",
-            category: "author",
-            page: 1,
-            pagesize: 10
-        }
-        this.storysearch = this.storysearch.bind(this)
-        this.Turnpages = this.Turnpages.bind(this)
-        this.getdata = this.getdata.bind(this)
-    }
-    componentWillMount() {//初始化加载数据
-        this.getdata()
-    }
-    async getdata() {
-        try {
-            let condition = {
-                type: "story",
-                page: this.state.page,
-                pagesize: this.state.pagesize
-            }
-            console.log(condition)
-            let data = await init(condition);
-            this.setState({
-                list: data
-            })
-        } catch (error) {
-            console.log(error)
-        }
+import React, { setState, useState, useEffect } from "react"
+import { Input, Select, Divider, Pagination, Table, Tag, Space, Button, Upload, message, Checkbox, Modal, Radio, Form, Alert } from "antd"
+import { search, init, removebook } from "./../../../api"
+import store from "./../../../store"
+// import { CollectionCreateForm } from "./../../CollectionCreateForm"
+function Story(props) {
+    const [listtotal, setlisttotal] = useState(1)
+    const [category, setcategory] = useState("author")
+    const [page, setpage] = useState(1)
+    const [size, setsize] = useState(10)
+    const [list, setlist] = useState([])
+    const { Search } = Input
+    const { Option } = Select;
+    const { Column } = Table;
+    // var rowinfo = ""
+    const [rowinfo, setrowinfo] = useState("")
 
+    useEffect(() => {
+
+        getdata()
+        console.log(list)
+    }, [page, size]);
+    function storysearch(val) {
+        console.log(val)
     }
-    async storysearch(val) {//小说页面搜索
-        // console.log(val, this.state.category)
+    function Turnpages(page, size) {
+        setsize(size)
+        setpage(page)
+    }
+    async function getdata() {
         let condition = {
             type: "story",
-            category: this.state.category,
-            info: val
+            page: page,
+            size: size,
         }
-        let data = await search(condition)
-        this.setState({
-            list: data
-        })
-    }
-    Turnpages(page, pagesize) {//翻页
-        try {
-            console.log(page, pagesize)
-            this.setState({
-                page: page,
-                pagesize: pagesize
+        await init(condition).then(res => {
+            console.log(res.data);
+            let list = res.data.map(item => {
+                item.key = item.Book_id
+                return item
             })
-            console.log(this.state)
-            this.getdata()
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-    changecategory = (val) => {
-        this.setState({
-            category: val
+            setlist(list)
+            let total = res.total
+            setlisttotal(total)
         })
+    }
+    function storysearch(val) {
+        let condition = {
+            type: "story",
+            category: category,
+            info: val,
+            token: props.token
+        }
+        let data = search(condition)
+        setlist(data)
 
     }
-    render() {
-        const { Search } = Input
-        const { Option } = Select;
-        const { Column } = Table;
-        const { list } = this.state//获取渲染数据
-        const data = [
-            {
-                key: '1',
-                firstName: 'John',
-                BookName: 'Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-            },
-            {
-                key: '2',
-                firstName: 'Jim',
-                BookName: 'Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-                tags: ['loser'],
-            },
-            {
-                key: '3',
-                firstName: 'Joe',
-                BookName: 'Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                tags: ['cool', 'teacher'],
-            },
-        ];
-        return <> <Input.Group>
-            <Select defaultValue="author" onChange={this.changecategory} style={{ width: 100 }}>
-                <Option value="author">作者</Option>
-                <Option value="bookid">书本ID</Option>
-                <Option value="category">分类</Option>
-            </Select>
-            <Search
-                placeholder="input search text"
-                onSearch={value => this.storysearch(value)}
+    useEffect(() => {
 
-                style={{ width: 200 }}
-            /></Input.Group>
-            <Divider />
-            <div>
-                <Table dataSource={data} pagination={false} >
-                    <Column title="BookId" dataIndex="key" key="BookId" />
-                    <Column title="BookName" dataIndex="BookName" key="BookName" />
-                    <Column title="Age" dataIndex="age" key="age" />
-                    <Column title="Address" dataIndex="address" key="address" />
-                    <Column
-                        title="Tags"
-                        dataIndex="tags"
-                        key="tags"
-                        render={tags => (
-                            <>
-                                {tags.map(tag => (
-                                    <Tag color="blue" key={tag}>
-                                        {tag}
-                                    </Tag>
-                                ))}
-                            </>
-                        )}
-                    />
-                    <Column
-                        title="Action"
-                        key="action"
-                        render={(text, record) => (
-                            <Space size="small">
-                                <Button type="primary" ghost>Update</Button>
-                                <Button type="danger" ghost>Delete</Button>
-                            </Space>
-                        )}
-                    />
-                </Table>
-                <Pagination
-                    // total={data.length}
-                    total={90}
-                    showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
-                    defaultPageSize={10}
-                    defaultCurrent={1}
-                    onChange={(page, pagesize) => { this.Turnpages(page, pagesize) }}
+    }, [category])
+    function cc(val) {//修改搜索分类
+        setcategory(val)
+    }
+
+    function remove(data) {
+        console.log(data)
+        var Book_id = data.Book_id
+        var token = store.getState().token
+        removebook(Book_id, token).then(res => {
+            if (res.code == 2000) {
+                message.info('删除成功!');
+                getdata()
+            }
+        })
+    }
+
+    const [visible, setVisible] = useState(false);
+
+    const onCreate = values => {
+        console.log('Received values of form: ', values);
+        setVisible(false);
+    };
+
+    return (<> <Input.Group>
+        <Select defaultValue="author" onChange={cc} style={{ width: 100 }}>
+            <Option value="author">作者</Option>
+            <Option value="bookid">书本ID</Option>
+            <Option value="category">分类</Option>
+        </Select>
+        <Search
+            placeholder="input search text"
+            onSearch={value => storysearch(value)}
+
+            style={{ width: 200 }}
+        /> <Button type="primary" style={{ float: "right" }} onClick={() => {
+            setVisible(true);
+        }}>添加新书</Button></Input.Group>
+
+        <Divider />
+        <div>
+            <Table dataSource={list} pagination={false} >
+                <Column title="Book_id" dataIndex="Book_id" />
+                <Column title="Bookname" dataIndex="Bookname" />
+                <Column title="Type" dataIndex="Type" />
+
+                <Column title="Author" dataIndex="Author" />
+                <Column title="Tags" dataIndex="tags" />
+
+                <Column
+                    title="Action"
+                    key="action"
+                    render={(text, record) => (
+                        <Space size="small">
+                            <Button type="primary" ghost onClick={() => { setrowinfo(record); setVisible(true); }}>Update</Button>
+                            <Button type="danger" ghost onClick={() => { remove(record) }}>Delete</Button>
+                        </Space>
+                    )}
                 />
-            </div>
-        </>
-    }
+            </Table>
+
+            <Pagination
+                total={listtotal}
+                showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+                defaultsize={10}
+                defaultCurrent={1}
+                onChange={(page, pagesize) => { Turnpages(page, pagesize) }}
+            />
+        </div>
+        <CollectionCreateForm
+            visible={visible}
+            onCreate={onCreate}
+            onCancel={() => {
+                setVisible(false);
+            }}
+            rowinfo={rowinfo}
+
+        />
+
+
+    </>)
 }
+
+const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo }) => {
+    const { Option } = Select
+    const upload = {
+        name: 'file',
+
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
+    const plainOptions = ['热血', '校园', '轻松', "爽文", "异能", "重生", "公主", "异术超能", "HE", "暧昧", "YY", "美人", "都市生活", "穿越", "励志", "修炼", "玄术"];
+    const [form] = Form.useForm();
+    return (
+        <Modal
+            destroyOnClose="true"
+
+            visible={visible}
+            title="小说信息"
+            okText="提交"
+            cancelText="取消"
+            onCancel={() => {
+                form.resetFields()
+                console.log(1)
+                onCancel()
+            }}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then(values => {
+                        form.resetFields();
+                        onCreate(values);
+                    })
+                    .catch(info => {
+                        console.log('Validate Failed:', info);
+                    });
+
+            }}
+        >
+            <Form
+                form={form}
+
+                layout="vertical"
+                name="form_in_modal"
+                initialValues={{
+                    "bookname": rowinfo.Bookname,
+                    "author": rowinfo.Author,
+                    "category": rowinfo.category,
+                    "summary": rowinfo.summary,
+
+                }}
+            >
+                <Form.Item
+                    name="bookname"
+                    label="书名"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入书名',
+                        },
+
+                    ]}
+
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="author"
+                    label="作者"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入作者姓名',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="category"
+                    label="类别"
+                    rules={[{
+                        required: true,
+                        message: "请选择小说分类"
+                    }]}
+                    initialValue={rowinfo.Type}>
+                    <Select >
+                        <Option value="city">都市</Option>
+                        <Option value="xuanhuan">玄幻</Option>
+                        <Option value="xianxia">仙侠</Option>
+                        <Option value="lingyi">灵异</Option>
+                        <Option value="lishi">历史</Option>
+                        <Option value="youxi">游戏</Option>
+                        <Option value="kehuan">科幻</Option>
+                        <Option value="wuxia">武侠</Option>
+                        <Option value="qihuan">奇幻</Option>
+                        <Option value="jingji">竞技</Option>
+                        <Option value="qita">其他</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    name="tags"
+                    label="标签"
+                    rules={[{
+                        required: true,
+                        message: "请选择小说标签"
+                    }]
+
+                    }
+                    initialValue={rowinfo.tags}
+                >
+                    <Checkbox.Group options={plainOptions} />
+                </Form.Item>
+
+                <Form.Item
+                    name="summary"
+                    label="概述"
+                    initialValue={rowinfo.introduce}
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入概述',
+                        },
+                    ]}>
+                    <Input.TextArea type="textarea" autoSize={true} />
+                </Form.Item>
+
+            </Form>
+        </Modal>
+    );
+};
+
+
+
 export default Story

@@ -8,14 +8,6 @@ var services = axios.create({
         "content-type": "application/json"
     }
 })
-
-// <Spin tip="Loading...">
-// <Alert
-//   message="Alert message title"
-//   description="Further details about the context of this alert."
-//   type="info"
-// />
-// </Spin>
 var spinning = true
 services.interceptors.request.use((config) => {
     spinning = true
