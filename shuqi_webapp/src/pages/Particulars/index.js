@@ -11,15 +11,33 @@ class Particulars extends Component {
         ibook: null, //是否已加入书架(Booleans)
         novelData: [],//小说数据
         relevantData: [],//相关推荐数据
-        // id:'' //当前小说的类型id
+        uid: '', //当前小说id
+        comData: null,//当前小说评论的数据
+        totals:''
     }
     componentDidMount() {
         //对应小说的数据
         this.setState({
-            novelData: this.props.location.state
+            novelData: this.props.location.state,
+            uid: this.props.location.state.bid
         })
         //相关推荐请求
         this.requestDa()
+        //评论数据请求
+        this.getCom()
+    }
+    //评论数据请求
+    async getCom() {
+        try {
+            let p = await particularsApi.getComment(this.props.location.state.bid)
+            p.data.data.forEach(item => {
+                item.pubTime = this.formatTime(item.pubTime, '.', true)
+            })
+            // console.log(p);
+            this.setState({
+                comData: p.data.data
+            })
+        } catch (err) { console.log(err); }
     }
     //相关相关推荐请求
     async requestDa() {
@@ -58,7 +76,7 @@ class Particulars extends Component {
         // console.log('添加');
     }
     // 开始阅读、最新章
-    readBook=()=>{
+    readBook = () => {
         console.log('点击了开始阅读或最新章');
         // 跳转阅读页
         // this.props.history.push({
@@ -67,7 +85,7 @@ class Particulars extends Component {
         // })
     }
     //目录
-    catalog=()=>{
+    catalog = () => {
         console.log('打开了目录');
         // 跳转目录页
         // this.props.history.push({
@@ -76,19 +94,46 @@ class Particulars extends Component {
         // })
     }
     // 写评论
-    addComment=()=>{
+    addComment = () => {
         console.log('写评论');
     }
     //查看全部评论
-    comments=()=>{
+    comments = () => {
         console.log('查看全部评论');
     }
 
+    //时间戳转换
+    formatTime = (timestamp, separator = '-', flag = false, timeS = ':') => {
+        let str = '';
+        let date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let Y = date.getFullYear() + separator;
+        let M = this.autoChange(date.getMonth() + 1) + separator; //计算机的月份是从0开始滴，需要+1
+        let D = this.autoChange(date.getDate());
+        str = Y + M + D;
+        if (flag) {
+            let h = this.autoChange(date.getHours()) + timeS;
+            let m = this.autoChange(date.getMinutes()) + timeS;
+            let s = this.autoChange(date.getSeconds());
+            let timeStr = h + m + s;
+            str += " ";
+            str += timeStr;
+        }
+        return str;
+        // return console.log(str);
+    }
+    autoChange = (num) => {
+        if (num < 10) {
+            return "0" + num;
+        } else {
+            return num;
+        }
+    }
 
     render() {
-        let { novelData, relevantData, ibook } = this.state
+        let { novelData, relevantData, ibook, comData } = this.state
         // console.log(novelData);
         // console.log(relevantData);
+        console.log('评论数据', comData);
         return (
             <>
                 {
@@ -143,12 +188,10 @@ class Particulars extends Component {
                                     {/* 标签 */}
                                     <div className="cover-tags">
                                         {
-                                            // console.log(novelData.tags)
                                             novelData.tags ?
                                                 novelData.tags.map(item => <span key={item}>{item}</span>)
                                                 : null
                                         }
-                                        {/* <span>{novelData.tags}</span> */}
                                     </div>
                                     {/* 标签end */}
 
@@ -178,31 +221,40 @@ class Particulars extends Component {
                                     {/* 评论标题end */}
 
                                     {/* 评论内容 */}
-                                    <div className="cover-comment">
-                                        <div className="comment-item">
-                                            <div className="thumb">
-                                                <img src="http://q.qlogo.cn/qqapp/100730840/B285225CB8B681C8F7F723E4EC7CE8F4/100" alt="" />
-                                            </div>
-                                            <div className="main">
-                                                <div className="name">青沙逝</div>
-                                                <div className="cmttext">明晚（6月27日）爆更五章!爆更五章!爆更五章!重要的事情说三遍!明天上架，白天的更新推到晚上一起爆更，请各位继续支持啊!</div>
-                                                <div className="info">
-                                                    <div className="t">2018.6.26 17:36</div>
-                                                    <div className="d">
-                                                        <div className="c">
-                                                            <span>图标</span>
-                                                            <span>715</span>
+                                    {
+                                        comData ?
+                                            <div className="cover-comment">
+                                                {
+                                                    comData.map(item => (
+                                                        <div className="comment-item" key={item.pubTime}>
+                                                            <div className="thumb">
+                                                                <img src="http://img-tailor.11222.cn/pm/book/operate/2020041616331364.png" alt="" />
+                                                            </div>
+                                                            <div className="main">
+                                                                <div className="name">{item.nickName}</div>
+                                                                <div className="cmttext">{item.text}</div>
+                                                                <div className="info">
+                                                                    <div className="t">{item.pubTime}</div>
+                                                                    <div className="d">
+                                                                        <div className="c">
+                                                                            <span>图标</span>
+                                                                            <span>{item.zanNum}</span>
+                                                                        </div>
+                                                                        <div className="z">
+                                                                            <span>图标</span>
+                                                                            <span>{item.replyNum}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div className="z">
-                                                            <span>图标</span>
-                                                            <span>26</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    ))
+                                                }
 
-                                    </div>
+                                            </div>
+                                            : null
+                                    }
+
                                     {/* 评论内容end */}
 
                                     {/* 查看全部评论 */}
