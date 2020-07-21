@@ -8,21 +8,22 @@ export function withLogin(Inner) {
             }
             this.state.loginState = false
         }
-        componentDidMount() {
+        componentWillMount() {
             let token = localStorage.getItem("shuqi_cms")
-            if (token.length > 0) {
+            if (token != null) {
                 this.setState({
                     loginState: true
                 })
             }
+            super.componentWillMount();
         }
         render() {
-            let { loginState } = this.state
+            const { loginState } = this.state
             if (loginState) {
                 return super.render()
             } else {
                 this.props.history.push("/login")
-                return
+                return null
             }
         }
     }
