@@ -5,12 +5,14 @@ import { search, comment, removeComment } from "./../../../api"
 function Comment() {
 
     const [listtotal, setlisttotal] = useState(1)
-    const [category, setcategory] = useState("Username")
+    const [category, setcategory] = useState("mid")
     const [page, setpage] = useState(1)
     const [size, setsize] = useState(10)
     const [list, setlist] = useState([])
     const { Column } = Table;
     const [userlist, setuserlist] = useState("")
+    const [searchorinit, setsearchorinit] = useState(0)
+    const [searchval, setsearchval] = useState("")
     useEffect(() => {
         getdata()
         console.log(list)
@@ -31,6 +33,7 @@ function Comment() {
             }
             let list = res.data.map(item => {
                 item.key = item.mid
+                item.time = new Date(item.pubTime * 1000).toLocaleDateString()
                 return item
             })
             setlist(list)
@@ -39,10 +42,13 @@ function Comment() {
         })
     }
     async function commentsearch(val) {
+        setsearchval(val)
         console.log(val)
         let condition = {
-            Dbtable: "cbbb",
+            Dbtable: "abbb",
             category: category,
+            page: page,
+            size: size,
             info: val,
             token: store.getState().token
         }
@@ -50,22 +56,29 @@ function Comment() {
             console.log(res)
             if (res.code === 2000) {
                 let list = res.data.map(item => {
-                    item.key = item.Id
+                    item.key = item.mid
                     return item
                 })
                 setlist(list)
+                setsearchorinit(1)
             } else {
                 message.error('查询失败');
+                setsearchorinit(0)
                 getdata()
+
             }
 
         })
     }
     function remove(data) {
         console.log(data)
-        var Id = data.Id
+        var mid = data.mid
         var token = store.getState().token
-        removeComment(Id, token).then(res => {
+        let condition = {
+            mid: mid,
+            token: token
+        }
+        removeComment(condition).then(res => {
             if (res.code == 2000) {
                 message.success('删除成功!');
                 getdata()
@@ -76,6 +89,11 @@ function Comment() {
     function Turnpages(page, size) {
         setsize(size)
         setpage(page)
+        if (searchorinit) {
+            commentsearch(searchval)
+        } else {
+            getdata()
+        }
     }
     const { Search } = Input;
     const { Option } = Select;
@@ -96,7 +114,7 @@ function Comment() {
             <Table dataSource={list} pagination={false} >
                 <Column title="Comment_id" dataIndex="mid" />
                 <Column title="nickName" dataIndex="nickName" />
-                <Column title="pubTime" dataIndex="pubTime" />
+                <Column title="pubTime" dataIndex="time" />
                 <Column title="zanNum" dataIndex="zanNum" />
                 <Column title="replyNum" dataIndex="replyNum" ellipsis={true} style={{ width: 200, border: "1px solid" }} />
                 <Column

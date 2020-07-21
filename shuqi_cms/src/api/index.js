@@ -69,8 +69,9 @@ export const insertStory = (data) => {
 
 
 export const removeSection = (data) => {
+    console.log(data)
     return axios({
-        url: "section/delete",
+        url: "/goods/section/delete",
         method: "delete",
         data: { ...data }
     })
@@ -78,7 +79,7 @@ export const removeSection = (data) => {
 export const insertSection = (data) => {
     console.log("api:" + JSON.stringify(data))
     return axios({
-        url: "/section/insert",
+        url: "/goods/section/insert",
         method: "post",
         data: {
             ...data
@@ -86,8 +87,9 @@ export const insertSection = (data) => {
     })
 }
 export const updateSection = (data) => {
+    console.log(data)
     return axios({
-        url: "/section/update",
+        url: "/goods/section/update",
         method: "put",
         data: {
             ...data
@@ -95,8 +97,9 @@ export const updateSection = (data) => {
     })
 }
 export const removeComment = (data) => {
+    console.log(data)
     return axios({
-        url: "/comment/remove",
+        url: "/goods/comment/remove",
         method: "delete",
         data: {
             ...data
@@ -105,4 +108,8 @@ export const removeComment = (data) => {
 }
 export const comment = (data) => {
     return axios.get("/goods/comment", { params: { ...data } })
+}
+
+export const section = (data) => {
+    return axios.get("/goods/section", { params: { ...data } })
 }
