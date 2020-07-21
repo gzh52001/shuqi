@@ -3,13 +3,13 @@ import { withLogin } from "../../utils/Hoc"
 import "./Index.css"
 import { Route, Redirect, Switch } from "react-router-dom"
 import { Layout, Menu } from 'antd';
-import { ProjectOutlined, BookOutlined, CloudUploadOutlined, UsergroupAddOutlined, LogoutOutlined } from '@ant-design/icons';
+import { ProjectOutlined, BookOutlined, UsergroupAddOutlined, LogoutOutlined, MessageOutlined } from '@ant-design/icons';
 import store from "./../../store"
 
 import Story from "./Story"
 import Users from "./Users"
 import Section from "./Section"
-import axios from "./../../utils/request"
+import Comment from "./Comment"
 import Nofind from "./../Nofind"
 class Index extends React.Component {
     constructor() {
@@ -32,19 +32,10 @@ class Index extends React.Component {
                 now_path: this.props.location.pathname
             })
         }
-        // let datas = await fetch("http://www.nanshig.com/mobile/index.php?act=index").then(res => res.json())
-        // console.log(datas)
 
-        // const datas = await axios.post('/login', {
-        //     username: "111", password: "111"
-        // }).then(res => {
-        //     return res
-        // })
-
-        // console.log(datas)
     }
     logout = () => {
-        localStorage.removeItem("shuqi_cms_token")
+        localStorage.removeItem("shuqi_cms")
         this.props.history.push("/login")
     }
     render() {
@@ -76,13 +67,16 @@ class Index extends React.Component {
                             >
                                 <Menu.Item key="/index/story" icon={<BookOutlined />}>
                                     小说管理
-                          </Menu.Item>
+                                </Menu.Item>
                                 <Menu.Item key="/index/users" icon={<UsergroupAddOutlined />}>
                                     用户管理
-                          </Menu.Item>
+                                </Menu.Item>
                                 <Menu.Item key="/index/section" icon={<ProjectOutlined />}>
                                     章节更新
-                          </Menu.Item>
+                                </Menu.Item>
+                                <Menu.Item key="/index/comment" icon={<MessageOutlined />}>
+                                    评论管理
+                                </Menu.Item>
 
                             </Menu>
                         </Sider>
@@ -94,13 +88,15 @@ class Index extends React.Component {
                                     padding: 24,
                                     margin: 0,
                                     minHeight: 280,
-                                    boxSizing: "border-box"
+                                    boxSizing: "border-box",
+                                    overflowY: "auto"
                                 }}
                             >
                                 <Switch>
                                     <Route path="/index/users" component={Users}></Route>
                                     <Route path="/index/story" component={Story}></Route>
                                     <Route path="/index/section" component={Section}></Route>
+                                    <Route path="/index/comment" component={Comment}></Route>
                                     <Redirect from="/" to="index/story" exact></Redirect>
                                     <Route component={Nofind} />
                                 </Switch>
@@ -112,5 +108,5 @@ class Index extends React.Component {
         )
     }
 }
-// Index = withLogin(Index)
+Index = withLogin(Index)
 export default Index

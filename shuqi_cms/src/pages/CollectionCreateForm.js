@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { Modal, Form, Select, Input, Button, Upload, message, Checkbox } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, changetype }) => {
+import { updateStory, insertStory } from "./../api"
+import store from "./../store"
+export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) => {
     const { Option } = Select
     const upload = {
         name: 'file',
@@ -21,44 +23,105 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, cha
             }
         },
     };
-    const [info, setinfo] = useState(rowinfo)
-    useEffect(() => {
-        console.log(111)
-        setinfo(rowinfo)
-    }, [rowinfo])
-    const plainOptions = ['热血', '校园', '轻松', "爽文", "异能", "重生", "公主"];
+    const [info, setinfo] = useState("")
+
+    const plainOptions = ['热血', '校园', '轻松', "爽文", "异能", "重生", "公主", "异术超能", "HE", "暧昧", "YY", "美人", "都市", "穿越", "励志", "修炼", "玄术"];
     const [form] = Form.useForm();
-    console.log((rowinfo))
+    useEffect(() => {
+        setinfo(rowinfo)
+        if (!mark) {
+
+            form.setFieldsValue({
+                "Book_id": rowinfo.Book_id,
+                "Bookname": rowinfo.Bookname,
+                "Author": rowinfo.Author,
+                "Type": rowinfo.Type,
+                "introduce": rowinfo.introduce,
+                "tags": rowinfo.tags
+            })
+        } else {
+            form.resetFields()
+        }
+    }, [mark, form, rowinfo])
     return (
         <Modal
+            getContainer={false}
+            destroyOnClose={true}
+            // afterClose={() => {
+            //     setinfo(null)
+            // }}
             visible={visible}
             title="Create a new collection"
             okText="提交"
             cancelText="取消"
-            onCancel={onCancel}
+            onCancel={() => {
+                form.setFieldsValue({})
+                form.resetFields()
+                setinfo("")
+                onCancel()
+            }}
             onOk={() => {
                 form
                     .validateFields()
                     .then(values => {
+                        console.log("com", values)
+                        values.tags.join(",")
+                        let condition = {
+                            ...values,
+                            token: store.getState().token,
+                            clicktotal: 1111
+                        }
+                        if (mark) {
+                            insertStory(condition).then(res => {
+                                console.log(res)
+                                if (res.code === 200) {
+                                    message.success("插入成功")
+                                } else {
+                                    message.error("插入失败")
+                                }
+                            })
+                        } else {
+                            updateStory(condition).then(res => {
+                                console.log(res)
+                                if (res.code === 404) {
+                                    message.error("修改失败")
+                                }
+                                if (res.code == 2000) {
+                                    message.success("修改成功")
+                                }
+                            })
+                        }
+
+
                         form.resetFields();
                         onCreate(values);
                     })
                     .catch(info => {
                         console.log('Validate Failed:', info);
                     });
-
             }}
         >
             <Form
                 form={form}
                 layout="vertical"
                 name="form_in_modal"
-                initialValues={{
-                    modifier: 'public',
-                }}
+
             >
                 <Form.Item
-                    name="bookname"
+                    name="Book_id"
+                    label="Id"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入Id',
+                        },
+
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="Bookname"
                     label="书名"
                     rules={[
                         {
@@ -67,12 +130,11 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, cha
                         },
 
                     ]}
-                    initialValue={info.Bookname}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="author"
+                    name="Author"
                     label="作者"
                     rules={[
                         {
@@ -84,13 +146,13 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, cha
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="category"
+                    name="Type"
                     label="类别"
                     rules={[{
                         required: true,
                         message: "请选择小说分类"
                     }]}
-                    initialValue="city">
+                >
                     <Select >
                         <Option value="city">都市</Option>
                         <Option value="xuanhuan">玄幻</Option>
@@ -114,17 +176,20 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, cha
                     }]
 
                     }
-                    initialValue="热血"
+
                 >
                     <Checkbox.Group options={plainOptions} />
                 </Form.Item>
 
-                <Form.Item name="summary" label="概述" rules={[
-                    {
-                        required: true,
-                        message: '请输入概述',
-                    },
-                ]}>
+                <Form.Item
+                    name="introduce"
+                    label="概述"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入概述',
+                        },
+                    ]}>
                     <Input.TextArea type="textarea" autoSize={true} />
                 </Form.Item>
                 <Form.Item label="小说封面" rules={[{ required: true, message: "请选择小说封面图片" }]}>
