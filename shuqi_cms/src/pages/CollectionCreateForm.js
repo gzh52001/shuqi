@@ -5,24 +5,24 @@ import { updateStory, insertStory } from "./../api"
 import store from "./../store"
 export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) => {
     const { Option } = Select
-    const upload = {
-        name: 'file',
+    // const upload = {
+    //     name: 'file',
 
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-            authorization: 'authorization-text',
-        },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-    };
+    //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    //     headers: {
+    //         authorization: 'authorization-text',
+    //     },
+    //     onChange(info) {
+    //         if (info.file.status !== 'uploading') {
+    //             console.log(info.file, info.fileList);
+    //         }
+    //         if (info.file.status === 'done') {
+    //             message.success(`${info.file.name} file uploaded successfully`);
+    //         } else if (info.file.status === 'error') {
+    //             message.error(`${info.file.name} file upload failed.`);
+    //         }
+    //     },
+    // };
     const [info, setinfo] = useState("")
 
     const plainOptions = ['热血', '校园', '轻松', "爽文", "异能", "重生", "公主", "异术超能", "HE", "暧昧", "YY", "美人", "都市", "穿越", "励志", "修炼", "玄术"];
@@ -37,7 +37,8 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mar
                 "Author": rowinfo.Author,
                 "Type": rowinfo.Type,
                 "introduce": rowinfo.introduce,
-                "tags": rowinfo.tags
+                "tags": rowinfo.tags,
+                "image": rowinfo.image
             })
         } else {
             form.resetFields()
@@ -51,7 +52,7 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mar
             //     setinfo(null)
             // }}
             visible={visible}
-            title="Create a new collection"
+            title="小说信息"
             okText="提交"
             cancelText="取消"
             onCancel={() => {
@@ -65,7 +66,7 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mar
                     .validateFields()
                     .then(values => {
                         console.log("com", values)
-                        values.tags.join(",")
+                        console.log(values.tags)
                         let condition = {
                             ...values,
                             token: store.getState().token,
@@ -110,15 +111,9 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mar
                 <Form.Item
                     name="Book_id"
                     label="Id"
-                    rules={[
-                        {
-                            required: true,
-                            message: '请输入Id',
-                        },
-
-                    ]}
+                    hidden={mark}
                 >
-                    <Input />
+                    <Input readOnly />
                 </Form.Item>
                 <Form.Item
                     name="Bookname"
@@ -192,13 +187,18 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mar
                     ]}>
                     <Input.TextArea type="textarea" autoSize={true} />
                 </Form.Item>
-                <Form.Item label="小说封面" rules={[{ required: true, message: "请选择小说封面图片" }]}>
-                    <Upload {...upload}>
-                        <Button>
-                            <UploadOutlined /> Click to Upload
-                </Button>
-                    </Upload>
+                <Form.Item
+                    name="image"
+                    label="小说封面"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入封面地址',
+                        },
+                    ]}>
+                    <Input />
                 </Form.Item>
+
             </Form>
         </Modal>
     );

@@ -1,19 +1,20 @@
 import React, { useState, useEffect, Fragment } from "react"
 import { Input, Select, Divider, Pagination, Table, Space, Button, message, Modal, Form } from "antd"
-import { search, init, removeSection, insertSection, updateSection } from "./../../../api"
+import { search, section, removeSection, insertSection, updateSection } from "./../../../api"
 import store from "./../../../store"
 
 function Section(props) {
     const [listtotal, setlisttotal] = useState(1)
-    const [category, setcategory] = useState("author")
+    const [category, setcategory] = useState("StoryName")
     const [page, setpage] = useState(1)
     const [size, setsize] = useState(10)
     const [list, setlist] = useState([])
-    const { Search } = Input
+    const { Search } = Input;
     const { Option } = Select;
     const { Column } = Table;
     const [mark, setmark] = useState(false)
-
+    const [searchorinit, setsearchorinit] = useState(0)
+    const [searchval, setsearchval] = useState("")
     // var rowinfo = ""
     const [rowinfo, setrowinfo] = useState("")
 
@@ -21,13 +22,18 @@ function Section(props) {
 
         getdata()
         console.log(list)
-    }, [page, size]);
+    }, [page, size, mark]);
     function storysearch(val) {
         console.log(val)
     }
     function Turnpages(page, size) {
         setsize(size)
         setpage(page)
+        if (searchorinit) {
+            storysearch(searchval)
+        } else {
+            getdata()
+        }
     }
     async function getdata() {
         let condition = {
@@ -35,10 +41,9 @@ function Section(props) {
             page: page,
             size: size,
         }
-        await init(condition).then(res => {
-            console.log(res.data);
+        await section(condition).then(res => {
             let list = res.data.map(item => {
-                item.key = item.Book_id
+                item.key = item.SectionId
                 return item
             })
             setlist(list)
@@ -47,9 +52,10 @@ function Section(props) {
         })
     }
     async function storysearch(val) {
-        console.log(val)
+        // console.log(val)
+        setsearchval(val)
         let condition = {
-            Type: "storylist",
+            Dbtable: "section",
             category: category,
             info: val,
             token: store.getState().token
@@ -57,29 +63,37 @@ function Section(props) {
         await search(condition).then(res => {
             console.log(res)
             if (res.code === 2000) {
-                let list = res.data.p.map(item => {
-                    item.key = item.Book_id
+                let list = res.data.map(item => {
+                    item.key = item.SectionId
                     return item
                 })
                 setlist(list)
+                let count = res.count
+                console.log("count:" + count)
+                setlisttotal(count)
+                setsearchorinit(1)
             } else {
                 message.error('查询失败');
                 getdata()
+                setsearchorinit(0)
             }
 
         })
     }
-    useEffect(() => {
-    }, [category])
+
     function cc(val) {//修改搜索分类
         setcategory(val)
     }
 
     function remove(data) {
         console.log(data)
-        var Section_id = data.Section_id
+        var SectionId = data.SectionId
         var token = store.getState().token
-        removeSection(Section_id, token).then(res => {
+        let condition = {
+            SectionId,
+            token
+        }
+        removeSection(condition).then(res => {
             if (res.code == 2000) {
                 message.success('删除成功!');
                 getdata()
@@ -92,15 +106,15 @@ function Section(props) {
     const [visible, setVisible] = useState(false);
 
     const onCreate = values => {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         setVisible(false);
         setmark(false)
+        getdata()
     };
 
     return (<Fragment> <Input.Group>
-        <Select defaultValue="Author" onChange={cc} style={{ width: 100 }}>
-            <Option value="Author">作者</Option>
-            <Option value="Book_id">书本ID</Option>
+        <Select defaultValue="StoryName" onChange={cc} style={{ width: 100 }}>
+            <Option value="StoryName">小说名</Option>
             <Option value="sectionId">章节Id</Option>
         </Select>
         <Search
@@ -113,17 +127,17 @@ function Section(props) {
 
         <Divider />
         <div>
-            <Table dataSource={list} pagination={false} >
-                <Column title="SectionId" dataIndex="Section_id" />
-                <Column title="SectionName" dataIndex="Sectionname" />
-                <Column title="StoryName" dataIndex="Story" />
-                <Column title="Content" dataIndex="Content" />
+            <Table dataSource={list} pagination={false}  >
+                <Column title="SectionId" dataIndex="SectionId" />
+                <Column title="SectionName" dataIndex="SectionName" />
+                <Column title="StoryName" dataIndex="StoryName" />
+                <Column title="Content" dataIndex="Content" ellipsis={true} />
                 <Column
                     title="Action"
                     key="action"
                     render={(text, record) => (
                         <Space size="small">
-                            <Button type="primary" ghost onClick={() => { setrowinfo(record); setVisible(true); }}>Update</Button>
+                            <Button type="primary" ghost onClick={() => { setrowinfo(record); setVisible(true); setmark(false) }}>Update</Button>
                             <Button type="danger" ghost onClick={() => { remove(record) }}>Delete</Button>
                         </Space>
                     )}
@@ -162,12 +176,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
         if (!mark) {
 
             form.setFieldsValue({
-                "SectionId": rowinfo.Book_id,
-                "Bookname": rowinfo.Bookname,
-                "Author": rowinfo.Author,
-                "Type": rowinfo.Type,
-                "introduce": rowinfo.introduce,
-                "tags": rowinfo.tags
+                "SectionId": rowinfo.SectionId,
+                "SectionName": rowinfo.SectionName,
+                "story": rowinfo.StoryName,
+                "Content": rowinfo.Content,
             })
         } else {
             form.resetFields()
@@ -176,7 +188,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
     async function insertsearch(val) {  //添加新章节的查询
         console.log(1)
         let condition = {
-            Type: "storylist",
+            Dbtable: "storylist",
             category: classify,
             info: val,
             token: store.getState().token
@@ -206,6 +218,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
 
     return (
         <Modal
+
             getContainer={false}
             destroyOnClose={true}
             visible={visible}
@@ -222,16 +235,18 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
                 form
                     .validateFields()
                     .then(values => {
-                        console.log("com", values)
-                        values.tags.join(",")
-                        let condition = {
-                            ...values,
-                            token: store.getState().token,
-                        }
-                        console.log(mark)
+
+
+                        console.log("mark:" + JSON.stringify(values))
                         if (mark) {
+                            let condition = {
+                                StoryName: values.checkstory,
+                                SectionName: values.SectionName,
+                                Content: values.Content,
+                                token: store.getState().token,
+                            }
                             insertSection(condition).then(res => {
-                                console.log(res)
+                                console.log("ins" + JSON.stringify(res))
                                 if (res.code === 200) {
                                     message.success("插入成功")
                                 } else {
@@ -239,8 +254,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
                                 }
                             })
                         } else {
+                            let condition = {
+                                StoryName: values.story,
+                                SectionName: values.SectionName,
+                                SectionId: values.SectionId,
+                                Content: values.Content,
+                                token: store.getState().token,
+                            }
                             updateSection(condition).then(res => {
-                                console.log(res)
+                                console.log("up:" + JSON.stringify(res))
                                 if (res.code === 404) {
                                     message.error("修改失败")
                                 }
@@ -265,18 +287,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
             >
 
                 <Form.Item
-                    name="Bookname"
+
                     hidden={!mark}
                     label="书名"
-                    rules={[
-                        {
-                            required: true,
-                            message: '请输入书名',
-                        },
 
-                    ]}
                 >
-                    <Select defaultValue="Author" onChange={cc} style={{ width: "20%" }}>
+                    <Select defaultValue="Author" name="Bookname" onChange={cc} style={{ width: "20%" }}>
                         <Option value="Author">作者</Option>
                         <Option value="Book_id">书本ID</Option>
                         <Option value="Type">分类</Option>
@@ -295,33 +311,34 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
                     hidden={!mark}
                     name="checkstory"
                     label="小说"
-                    rules={[{
-                        required: true,
-                        message: "请选择小说"
-                    }]}
-                >
-                    <Select placeholder="请选择" onChange={cbname}>
-                        {
-                            searchbook.map(item => {
-                                return <Option value={item.bookname} key={item.Bookname}>{item.bookname}</Option>
-                            })}
 
+                >
+                    <Select placeholder="请选择">
+                        {
+                            searchbook.map((item, index) => {
+                                return (<Option value={item.Bookname} key={item.Bookname}>{item.Bookname}</Option>)
+                            })
+                        }
                     </Select>
                 </Form.Item>
                 <Form.Item
                     hidden={mark}
                     name="story"
                     label="小说"
-                    rules={[{
-                        required: true,
-                        message: "请选择小说"
-                    }]}
+
                 >
                     <Input />
                 </Form.Item>
-
                 <Form.Item
-                    name="Sectionname"
+                    hidden={mark}
+                    name="SectionId"
+                    label="章节ID"
+
+                >
+                    <Input readOnly />
+                </Form.Item>
+                <Form.Item
+                    name="SectionName"
                     label="章节名"
                     rules={[
                         {
@@ -334,7 +351,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, rowinfo, mark }) =>
                 </Form.Item>
 
                 <Form.Item
-                    name="content"
+                    name="Content"
                     label="内容"
                     rules={[
                         {

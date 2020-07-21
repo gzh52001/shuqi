@@ -5,8 +5,8 @@ import { search, init, removebook, updateStory } from "./../../../api"
 import store from "./../../../store"
 import { CollectionCreateForm } from "./../../CollectionCreateForm"
 class Story extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             listtotal: 1,
             category: "Author",
@@ -16,7 +16,9 @@ class Story extends React.Component {
             rowinfo: "",
             visible: false,
             mark: false,
-            defaultsize: 0
+            defaultsize: 0,
+            searchorinit: 0,//1代表搜索，0代表初始化
+            searchval: ""
         }
     }
     componentDidMount() {
@@ -38,23 +40,26 @@ class Story extends React.Component {
             let list = res.data.map(item => {
                 item.key = item.Book_id
                 item.tag = item.tags.split(",")
-                console.log(item.tags)
                 return item
             })
             let total = res.total
             this.setState({
                 listtotal: total,
                 list: list,
-
             })
         })
     }
     async storysearch(val) {
+        this.setState({
+            searchval: val
+        })
         console.log(val)
         let condition = {
             Dbtable: "storylist",
             category: this.state.category,
             info: val,
+            page: this.state.page,
+            size: this.state.size,
             token: store.getState().token
         }
         await search(condition).then(res => {
@@ -65,14 +70,19 @@ class Story extends React.Component {
                     item.tag = item.tags.split(",")
                     return item
                 })
-                let total = list.length
+                let total = res.count
+                console.log(total)
                 this.setState({
                     list: list,
-                    listtotal: total
+                    listtotal: total,
+                    searchorinit: 1
                 })
             } else {
                 message.error('查询失败');
                 this.getdata()
+                this.setState({
+                    searchorinit: 0
+                })
             }
 
         })
@@ -101,7 +111,12 @@ class Story extends React.Component {
             page: page,
             size: size
         })
-        this.getdata()
+        if (this.state.searchorinit) {
+            console.log(1111)
+            this.storysearch(this.state.searchval)
+        } else {
+            this.getdata()
+        }
     }
     changecate = (val) => {
         this.setState({
