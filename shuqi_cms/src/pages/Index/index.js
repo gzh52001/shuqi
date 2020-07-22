@@ -6,16 +6,16 @@ import { Layout, Menu } from 'antd';
 import { ProjectOutlined, BookOutlined, UsergroupAddOutlined, LogoutOutlined, MessageOutlined } from '@ant-design/icons';
 import store from "./../../store"
 
-// import Story from "./Story"
-// import Users from "./Users"
-// import Section from "./Section"
-// import Comment from "./Comment"
-// import Nofind from "./../Nofind"
-const Story = lazy(() => import("./Story"))
-const Users = lazy(() => import("./Users"))
-const Section = lazy(() => import("./Section"))
-const Comment = lazy(() => import("./Comment"))
-const Nofind = lazy(() => import("./../Nofind"))
+import Story from "./Story"
+import Users from "./Users"
+import Section from "./Section"
+import Comment from "./Comment"
+import Nofind from "./../Nofind"
+// const Story = lazy(() => import("./Story"))
+// const Users = lazy(() => import("./Users"))
+// const Section = lazy(() => import("./Section"))
+// const Comment = lazy(() => import("./Comment"))
+// const Nofind = lazy(() => import("./../Nofind"))
 class Index extends React.Component {
     constructor() {
         super()
