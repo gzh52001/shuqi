@@ -5,11 +5,12 @@ const initialState = {
     user: localStorage.getItem("shuqi_cms_user")
 }
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, token }) => {
     switch (type) {
 
-        case "INC":
-            return { ...state, ...payload }
+        case "login":
+
+            return { ...state, ...token }
 
         default:
             return state

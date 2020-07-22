@@ -2,6 +2,7 @@ import React from "react"
 import { Form, Input, Button } from "antd"
 import "./Login.css"
 import { login } from "./../../api"
+import store from "../../store"
 class Login extends React.Component {
     formRef = React.createRef();
     constructor() {
@@ -25,15 +26,21 @@ class Login extends React.Component {
     // tailLayout = {
     //     wrapperCol: { offset: 10, span: 12 },
     // };
-    login = () => {
+    async login() {
         let { username, password } = this.state
         if (username && password) {
             console.log(1)
-            login(username, password).then(res => {
+            await login(username, password).then(res => {
                 if (res.code == 200) {
                     console.log(res)
-                    localStorage.setItem("shuqi_cms", res.data.token)
+                    let token = res.data.token
+                    localStorage.setItem("shuqi_cms", token)
                     localStorage.setItem("shuqi_cms_user", username)
+                    store.dispatch({
+                        type: "login", token: {
+                            token: token
+                        }
+                    })
                     this.props.history.push("/")
                 }
             })
@@ -76,7 +83,7 @@ class Login extends React.Component {
                         name="password"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Input ref="password" onChange={(e) => { this.change("pwd", e) }} />
+                        <Input ref="password" type={"password"} onChange={(e) => { this.change("pwd", e) }} />
                     </Form.Item>
 
                     <Form.Item {...tailLayout}>
