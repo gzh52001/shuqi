@@ -13,12 +13,11 @@ node.js
 
 
 #### 团队与分工
-
-        * 组长：李铭航，成员：唐国绍,林桂林
-        * 负责模块说明
-            * 林桂林
-                * 负责：小说管理系统前端页面实现
-                * 参与：小说管理系统后台接口设计，完成搜索、章节更新模块、评论管理模块接口
+* 组长：李铭航，成员：唐国绍,林桂林
+* 负责模块说明
+* 林桂林
+  * 负责：小说管理系统前端页面实现
+  * 参与：小说管理系统后台接口设计，完成搜索、章节更新模块、评论管理模块接口
 
 * 小说管理系统界面
  ![小说管理](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEGvEOZj8AOVBnkCkFPlHRtFrMb48XT1ZlscIaFHR4f0rGn6AbJNLObLp0TvkD5Jcfo8wd6bDdtoKZWCkTtm.Fqc!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
