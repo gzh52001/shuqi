@@ -1,39 +1,37 @@
-# shuqixiaoshuo
+# 书旗小说网
 
 #### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+* 官网：http://t.shuqi.com/
+* 移动端：http://203.195.139.74:3500
+* 小说管理系统：http://203.195.139.74
 
 #### 软件架构
-软件架构说明
+react
+redux
+mysql
+node.js
 
 
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+#### 团队与分工
+    * 组长：李铭航，成员：唐国绍,林桂林
+    * 负责模块说明
+        * 林桂林
+        * 负责：小说管理系统前端页面实现
+        * 参与：小说管理系统后台接口设计，完成搜索、章节更新模块、评论管理模块接口
+> 项目目录结构
 
 
-#### 码云特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+
+>  页面截图
+> 小说管理界面
+> ![小说管理](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEGvEOZj8AOVBnkCkFPlHRtFrMb48XT1ZlscIaFHR4f0rGn6AbJNLObLp0TvkD5Jcfo8wd6bDdtoKZWCkTtm.Fqc!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
+> 新增小说
+> ![新增小说](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEEFy3hqlZg46vslwC1kz3DWWvKhDDEcvSt1BsqbX6KkU2I.17T.KO70ez*FMtRXrfqgaLIvBukrqw7D5F9ZIYBI!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
+> 修改小说
+> ![修改小说](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEPf.qsKUpxQCAbDWVJET5FENDxG6CXP0ueDG7S.fkk1hr95L9QQlhCB5qJfOrBtiQ3c9FN9wL1Us9rMDuGAwZNM!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
+> 章节更新
+> ![章节更新](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEI3fbVGFjDRfyOHh9SvdRce0xPsZdqY84TGLlLvgbf97Uhhah3QK.TyXDHQu9pNIV9ibVBH7hPo*.9WiYJCAtcA!/b&bo=gAepAwAAAAADFx8!&rf=viewer_4&t=5)
+
+
