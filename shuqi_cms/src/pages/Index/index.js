@@ -1,16 +1,21 @@
-import React from "react"
+import React, { lazy, Suspense } from "react"
 import { withLogin } from "../../utils/Hoc"
 import "./Index.css"
 import { Route, Redirect, Switch } from "react-router-dom"
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Spin } from 'antd';
 import { ProjectOutlined, BookOutlined, UsergroupAddOutlined, LogoutOutlined, MessageOutlined } from '@ant-design/icons';
 import store from "./../../store"
 
-import Story from "./Story"
-import Users from "./Users"
-import Section from "./Section"
-import Comment from "./Comment"
-import Nofind from "./../Nofind"
+// import Story from "./Story"
+// import Users from "./Users"
+// import Section from "./Section"
+// import Comment from "./Comment"
+// import Nofind from "./../Nofind"
+const Story = lazy(() => import("./Story"))
+const Users = lazy(() => import("./Users"))
+const Section = lazy(() => import("./Section"))
+const Comment = lazy(() => import("./Comment"))
+const Nofind = lazy(() => import("./../Nofind"))
 class Index extends React.Component {
     constructor() {
         super()
@@ -92,14 +97,27 @@ class Index extends React.Component {
                                     overflowY: "auto"
                                 }}
                             >
-                                <Switch>
-                                    <Route path="/index/users" component={Users}></Route>
-                                    <Route path="/index/story" component={Story}></Route>
-                                    <Route path="/index/section" component={Section}></Route>
-                                    <Route path="/index/comment" component={Comment}></Route>
-                                    <Redirect from="/" to="index/story" exact></Redirect>
-                                    <Route component={Nofind} />
-                                </Switch>
+                                <Suspense fallback={<div style={{
+                                    textAlign: "center",
+                                    background: "rgba(0, 0, 0, 0.05)",
+                                    borderRadius: "4px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    width: "100%",
+                                    height: '100%'
+                                }}>
+                                    <Spin />
+                                </div>}>
+                                    <Switch>
+                                        <Route path="/index/users" component={Users}></Route>
+                                        <Route path="/index/story" component={Story}></Route>
+                                        <Route path="/index/section" component={Section}></Route>
+                                        <Route path="/index/comment" component={Comment}></Route>
+                                        <Redirect from="/" to="index/story" exact></Redirect>
+                                        <Route component={Nofind} />
+                                    </Switch>
+                                </Suspense>
                             </Content>
                         </Layout>
                     </Layout>

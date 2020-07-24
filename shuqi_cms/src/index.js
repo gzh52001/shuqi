@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { withRouter, HashRouter, BrowserRouter } from "react-router-dom"
+import { HashRouter, BrowserRouter } from "react-router-dom"
 import "antd/dist/antd.css"
 const Router = process.env.NODE_ENV === 'production' ? BrowserRouter : HashRouter;
 ReactDOM.render(
