@@ -29,7 +29,7 @@ node.js
  
  
  
- *李铭航 
+ * 李铭航 
   * 负责：我的 分类 分类列表 登录 注册 书架  章节 页面 数据库 用户和书本接口
   * 参与：小说管理系统后台接口设计，完成搜索完善
   * 前端页面
@@ -43,8 +43,8 @@ node.js
 (http://m.qpic.cn/psc?/V14cs8xp3DPlcu/ruAMsa53pVQWN7FLK88i5mRfieJc3hGRjKoEvN7O0U7BZLwEpATTqPGW57WHRa83zxPs1OFbXyR6Xw8uUeC5q*y1UC06ImERtsSYKnj43HQ!/b&bo=eQHhAgAAAAADB7k!&rf=viewer_4)
 
  
-  唐国绍
-  *负责：主页详情页搜索评论
+ * 唐国绍
+  * 负责：主页详情页搜索评论
   * 参与：书架完善 后台接口设计 数据库编写
   * 前端页面
    
