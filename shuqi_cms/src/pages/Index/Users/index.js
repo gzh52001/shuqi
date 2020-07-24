@@ -10,7 +10,7 @@ function Users() {
     const [page, setpage] = useState(1)
     const [size, setsize] = useState(10)
     const [list, setlist] = useState([])
-
+    const [searchorinit, setsearchorinit] = useState(0)
     const { Column } = Table;
     useEffect(() => {
 
@@ -54,9 +54,14 @@ function Users() {
                     item.key = item.Id
                     return item
                 })
+                setsearchorinit(1)
+                let count = res.count
+                console.log("count:" + count)
+                setlisttotal(count)
                 setlist(list)
             } else {
                 message.error('查询失败');
+                setsearchorinit(0)
                 getdata()
             }
 
@@ -77,6 +82,11 @@ function Users() {
     function Turnpages(page, size) {
         setsize(size)
         setpage(page)
+        if (searchorinit) {
+            storysearch(searchval)
+        } else {
+            getdata()
+        }
     }
     return <>
         <Input.Group>

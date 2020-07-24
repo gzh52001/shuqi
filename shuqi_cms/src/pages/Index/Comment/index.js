@@ -61,6 +61,9 @@ function Comment() {
                 })
                 setlist(list)
                 setsearchorinit(1)
+                let count = res.count
+                console.log("count:" + count)
+                setlisttotal(count)
             } else {
                 message.error('查询失败');
                 setsearchorinit(0)
