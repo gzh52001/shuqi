@@ -55,13 +55,23 @@ node.js
    * 参与：小说管理系统后台接口设计，完成搜索完善
    * 前端页面
 
+后端服务器
+
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163100_cc0c2fe6_7644835.png "psc.png")
+
+
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163437_89a47b87_7644835.png "4.png")
 
+我的
+
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163706_212f6bf7_7644835.png "psc (1).png")
 
+登录页面
+
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163449_78f097ba_7644835.png "5.png")
+
+章节内容
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163503_7a1fc3e5_7644835.png "6.png")
 
@@ -71,10 +81,27 @@ node.js
    * 负责：主页详情页搜索评论
    * 参与：书架完善 后台接口设计 数据库编写
    * 前端页面
+   
+* 截图：
+ 首页
+
+![首页上](https://images.gitee.com/uploads/images/2020/0724/174823_506756b2_7644835.png "1.png")![首页下](https://images.gitee.com/uploads/images/2020/0724/174857_59b942a3_7644835.png "2.png")
+
+搜索页
+
+![搜索页](https://images.gitee.com/uploads/images/2020/0724/191609_e5249766_7644835.png "3.png")
+
+详情页
+
+![详情页上](https://images.gitee.com/uploads/images/2020/0724/191643_1205ad38_7644835.png "4.png")![详情页下](https://images.gitee.com/uploads/images/2020/0724/191656_72633eba_7644835.png "5.png")
+
+评论页
+
+![详情页](https://images.gitee.com/uploads/images/2020/0724/191824_f38747b9_7644835.png "在这里输入图片标题")
+
+写评论
+
+![写评论](https://images.gitee.com/uploads/images/2020/0724/191924_71013e64_7644835.png "7.png")
+
 
    具体看视频 或 访问 http://203.195.139.74:3500/    http://203.195.139.74
-
-
-
-
-
