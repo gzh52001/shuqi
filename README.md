@@ -16,16 +16,46 @@ node.js
 
 #### 目录结构
 
+#####  shuqi_cms
   .  
-  |-- README.md   
-  |-- node_modules  
-  |-- package.json  
-  |-- public    
-  |-- src  
-  |-- yarn-error.log  
-  `-- yarn.lock  
+|-- README.md  
+|-- TREE.md  
+|-- config  
+|   |-- env.js  
+|   |-- getHttpsConfig.js  
+|   |-- jest  
+|   |-- modules.js  
+|   |-- paths.js  
+|   |-- pnpTs.js  
+|   |-- webpack.config.js  
+|   |-- webpackDevServer.config.js  
+|-- package.json  
+|-- public  
+|   |-- index.html  
+|   |-- logo192.png  
+|   |-- logo512.png  
+|   |-- manifest.json  
+|   |-- robots.txt  
+|-- scripts  
+|   |-- build.js  
+|   |-- start.js  
+|   |-- test.js  
+|-- src  
+|   |-- App.css  
+|   |-- App.js  
+|   |-- App.test.js  
+|   |-- api  
+|   |-- index.css   
+|   |-- index.js  
+|   |-- logo.svg  
+|   |-- pages  
+|   |-- serviceWorker.js  
+|   |-- setupTests.js  
+|   |-- store  
+|   |-- utils  
+`-- yarn.lock  
 
-  3 directories, 5 files
+
 
 #### 团队与分工
 
