@@ -1,0 +1,87 @@
+.minebox{
+    width: 3.75rem;
+    // height: 5.26rem;
+    // box-sizing: border-box;
+    // padding-bottom: .5rem;
+    overflow-y: auto;
+    >.headwrap{
+        
+        margin: 0 .16rem;
+        background: #fff;
+        >.myself{
+            width: 3.43rem;
+            height: 1.24rem;
+            display: flex;
+            margin: .12rem 0 .16rem;
+            background: #fff;
+            box-shadow: 0 .04rem .12rem 0 rgba(0,0,0,0.1);
+            border-radius: .04rem;
+            align-items: center;
+            >.tou{
+                width: .6rem;
+                height: .6rem;
+                margin: .32rem .16rem;
+                // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMAAABrrFhUAAABKVBMV…suH39Y5ELIrDu2ULn3NOr+2t7Koihv7bXX4/R2VdiODpl9A5MqPkHeJViAAAAAAElFTkSuQmCC) no-repeat;
+                background-position: 0 0;
+                background-size: cover;
+            }
+            >.namebox{
+              font-size: .18rem;
+              font-weight: bold;
+            }
+            >.reg{
+                padding: 0;
+                font-size: .18rem;
+                font-weight: bold;
+              span{
+                font-size: .18rem;
+                font-weight: bold;
+                color: #333;
+              }
+            }
+        }
+    }
+    >.item-box{
+        width: 100%;
+        display: flex;
+        align-items: center;
+       flex-direction: column;
+        >p{
+            box-sizing: border-box;
+            display: flex;
+            width: 3.43rem;
+            height: .63rem;
+            
+            align-items: center;
+            
+           justify-content: space-between;
+           border-bottom: 1px solid #eeeeee;
+           >.one{
+               font-size: .16rem;
+               color: #333;
+           }
+           .two{
+               color: #999;
+               font-size: .14rem;
+           }
+           >.quit{
+            width: 100%;
+            padding: 0 .1rem;
+            font-size: .14rem;
+            line-height: .44rem;
+            background-color: #DC143C;
+            color: #fff;
+            border-radius: .08rem;
+            text-align: center;
+            border: none;
+            outline: none;
+            opacity: 1;
+           }
+        }
+        >div{
+            width: 100%;
+            height: 1rem;
+            
+        }
+    }
+}

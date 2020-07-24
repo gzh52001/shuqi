@@ -1,0 +1,163 @@
+#aommentarea{
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: -0.5rem;
+    bottom: 0;
+    overflow-y: auto;
+    .aommentarea-con{
+        box-sizing: border-box;
+        width: 100%;
+        padding-right: 0.5rem;
+        position: relative;
+        //顶部导航
+        #Navigations{
+            z-index: 100;
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            // border: 2px solid red;
+            width: 100%;
+            box-sizing: border-box;
+            .am-navbar-light{
+                .am-navbar-left{
+                    color:#999;
+                }
+            }
+        }
+        // 底部的写书评
+        .writeTxt{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            border-top: 1px solid #eee7e7;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #fff;
+            p{
+                text-align: center;
+                padding: .12rem 0;
+                font-size: 18px;
+                color: #23b383;
+                margin-bottom: 0;
+
+            }
+        }
+        //图书内容  
+        .bookCon{
+            margin-top: 0.49rem;
+            height: 2.5rem;
+            border-bottom: 0.1rem solid #f5f5f9;
+            position: relative;
+            .bookimg{
+                background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595162278090&di=25a3ff6d75abbdd03987216f554d8886&imgtype=0&src=http%3A%2F%2Fimage3.cnpp.cn%2Fupload2%2Fnews%2F20120412%2F161403_49208_url.jpg') no-repeat;
+                background-size: 100%;
+                height: 70%;
+            }
+            .book{
+                position: absolute;left: 50%; top: 50%;   
+                transform: translate(-50%, -50%);
+                img{
+                    display: block;
+                    width: 1.3rem;
+                    margin: 0 auto;
+                }
+                p{
+                    text-align: center;
+                    font-size: 18px;
+                    line-height: 0.2rem;
+                    // height: 0.2rem;
+                    margin-top: 0.1rem;
+                    color: #666;
+                }
+            }
+        }
+         // 评论内容
+         #circle{
+             padding: 0.1rem;
+             p{
+                border-left: 0.05rem solid #23b383;
+                font-size: 18px;
+                padding-left: 0.05rem;
+             }
+         }
+         .cover-comment{
+            padding: 0.08rem .15rem;
+            margin-bottom: 0.45rem;
+            position: relative;
+            .comment-item{
+                position: relative;
+                padding-bottom: 0.08rem;
+                .thumb{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: .24rem;
+                    height: .24rem;
+                    padding-top: .08rem;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                }
+                .main{
+                    margin-left: .24rem;
+                    padding: .11rem 0 0 .08rem;
+                    .name{
+                        line-height: .2rem;
+                        font-size: 15px;
+                        color: #333;
+                    }
+                    .cmttext{
+                        padding-top: .12rem;
+                        color: #999;
+                        font-size: 14px;
+                        line-height: .20rem;
+                        display: -webkit-box;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 3;
+                    }
+                    .info{
+                        margin-top: .2rem;
+                        display: flex;
+                        flex-direction:row;
+                        justify-content:space-between;
+                        .t{
+                            color: #999;
+                            font-size: 12px;
+                            line-height: .16rem;
+                        }
+                        .d{
+                            color: #999;
+                            font-size: 12px;
+                            line-height: .16rem;
+                            .c{
+                                display: inline;
+                                margin-left: 0.08rem;
+                                span{
+                                    margin-left: 0.04rem;
+                                }
+                            }
+                            .z{
+                                display: inline;
+                                margin-left: 0.08rem;
+                                span{
+                                    margin-left: 0.04rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+}
+
+
