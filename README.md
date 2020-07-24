@@ -33,7 +33,7 @@ node.js
   * 负责：我的 分类 分类列表 登录 注册 书架  章节 页面 数据库 用户和书本接口
   * 参与：小说管理系统后台接口设计，完成搜索完善
   * 前端页面
-   (http://m.qpic.cn/psc?/V14cs8xp3DPlcu/45NBuzDIW489QBoVep5mcZSRQ4B6KvFcaazm6YRQ7Rrr.JduLYyMZCIGkhugoAk3gTU76eCCnFNuP.DRewnELHTHpdp0Dj9teGmsAHqe7No!/b&bo=dwGbAgAAAAADF90!&rf=viewer_4)
+   
    (http://m.qpic.cn/psc?/V14cs8xp3DPlcu/ruAMsa53pVQWN7FLK88i5g50cTSIHQJWXT90B5hKuJXgSOWaeLQqHXmFGRrJ*PG62EtC5G*wVZQoVgy7*8ulrUt.lI0d3G1h8Z*uDZ7kQ1I!/b&bo=9QIZBAAAAAADB8g!&rf=viewer_4)
 (http://m.qpic.cn/psc?/V14cs8xp3DPlcu/ruAMsa53pVQWN7FLK88i5p3xh76IaJoPzhxnl8ijwt2JhNGIgqY7bcfhTPus9JQAZzYnT9gMbLf76jcpDKb6bydKLdRLAVq5Sy2qO*z3vgE!/b&bo=dwGbAgAAAAADB80!&rf=viewer_4)
 (http://m.qpic.cn/psc?/V14cs8xp3DPlcu/45NBuzDIW489QBoVep5mcZ6aXk5Vbd9cDBxiVhrFp4rvS*28ZoVir3b5ecXXzLWVSd6zMLS8M7a3tlddPH9TKgjc70L6xLxESx*mnzd*Y7g!/b&bo=dwGbAgAAAAADJ.0!&rf=viewer_4)
@@ -43,11 +43,13 @@ node.js
 (http://m.qpic.cn/psc?/V14cs8xp3DPlcu/ruAMsa53pVQWN7FLK88i5mRfieJc3hGRjKoEvN7O0U7BZLwEpATTqPGW57WHRa83zxPs1OFbXyR6Xw8uUeC5q*y1UC06ImERtsSYKnj43HQ!/b&bo=eQHhAgAAAAADB7k!&rf=viewer_4)
 
  
-  Ť唐国绍
+  唐国绍
   *负责：主页详情页搜索评论
   * 参与：书架完善 后台接口设计 数据库编写
   * 前端页面
    
+   具体看视频 或 访问 http://203.195.139.74:3500/    http://203.195.139.74
+
 
    
 
