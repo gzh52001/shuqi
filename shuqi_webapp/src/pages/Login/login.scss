@@ -1,0 +1,128 @@
+.login{
+    padding: .2rem;
+    box-sizing: border-box;
+    >.titlewrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: .17rem;
+        >img{
+            height: .36rem;
+        }
+        >p{
+            >span{
+                font-size: .12rem;
+                line-height: .17rem;
+                color: #a1a1b3;
+                text-decoration: none;
+            }
+        }
+    }
+    >.fromWrap{
+        >.username{
+            margin-bottom: .12rem;
+            >input{
+                width: 100%;
+                margin: 0;
+                box-sizing: border-box;
+                height: .44rem;
+                border-radius: .04rem;
+                padding: .12rem .13rem;
+                font-size: .14rem;
+                line-height: .20rem;
+                border: none;
+                outline: none;
+                color: #1d1e1f;
+                background-color: #f7f7fa;
+                background-image: none;
+            }
+        }
+        >.password{
+            margin-bottom: .12rem;
+            >input{
+                width: 100%;
+                margin: 0;
+                box-sizing: border-box;
+                height: .44rem;
+                border-radius: .04rem;
+                padding: .12rem .13rem;
+                font-size: .14rem;
+                line-height: .20rem;
+                border: none;
+                outline: none;
+                color: #1d1e1f;
+                background-color: #f7f7fa;
+                background-image: none;
+            }
+        }
+        >.ckbox{
+            display: flex;
+            align-items: center;
+             >span{
+                 font-size: .13rem;
+                 margin-left: .10rem;
+                 color: #38b383;
+             }
+        }
+        >.btn{
+            margin-top: .12rem;
+            >.aa{
+                width: 100%;
+                padding: 0 .1rem;
+                font-size: .14rem;
+                line-height: .44rem;
+                background-color: #23b383;
+                color: #fff;
+                border-radius: .08rem;
+                text-align: center;
+                border: none;
+                outline: none;
+                opacity: 1;
+            }
+            >.bb{
+                width: 100%;
+                padding: 0 .1rem;
+                font-size: .14rem;
+                line-height: .44rem;
+                background-color: #23b383;
+                color: #fff;
+                border-radius: .08rem;
+                text-align: center;
+                border: none;
+                outline: none;
+                opacity:0.3;
+            }
+            
+        }
+        >.thirdLoginArea{
+            text-align: center;
+            margin-top: 1rem;
+            >.row{
+                display: flex;
+                text-align: center;
+                >.line{
+                    flex: 1;
+                    border-top: 1px solid #a1a1b3;
+                }
+                >.text{
+                    transform: translateY(-50%);
+                    padding: 0 .05rem;
+                    font-size: .12rem;
+                    color: #a1a1b3;
+                }
+            }
+            >.iconWraper{
+                margin-top: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                >img{
+                    
+                    width: .41rem;
+                    height: .41rem;
+                }
+            }
+        }
+        
+    }
+}

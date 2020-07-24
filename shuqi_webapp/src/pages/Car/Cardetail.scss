@@ -1,0 +1,147 @@
+.Carbox{
+    >.search-bar{
+          height: .41rem;
+          margin-bottom: .15rem;
+          >.am-search{
+              box-sizing:content-box;
+          }
+    }
+
+    >.content-box{
+        // box-sizing: border-box;
+        padding-top: .64rem;
+        overflow-y: scroll;
+        >div{
+            height: 100%;
+            padding-top: .48rem;
+            padding-bottom: 1.56rem;
+            transform: translate(0, calc(-1 * env(safe-area-inset-bottom)));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            >p{
+                font-family: "PingFang SC";
+                font-size: .15rem;
+                line-height: .21rem;
+                height: .21rem;
+                text-align: center;
+                color: #999;
+            }
+            >img{
+                width: 1.44rem;
+                height: 1.44rem;
+            }
+            >button{
+                height: .36rem;
+                width: auto;
+                min-width: 50%;
+                max-width: 90%;
+                padding: 0 .13rem;
+                position: relative;
+                background: #23b383;
+                display: inline-block;
+                justify-content: center;
+                align-items: center;
+                border-radius: .04rem;
+                // box-sizing: border-box;
+                vertical-align: middle;
+                // user-select: none;
+                border: none;
+                outline: none;
+                font-size: .14rem;
+                color: #fff;
+                margin-top: 1.7rem;
+            }
+        }
+    } 
+    >.self-area{
+        padding: 0 .12rem;
+        margin-bottom: .59rem;
+        padding-bottom: env(safe-area-inset-bottom);
+        // height: 6.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        // box-sizing: border-box;
+        // align-items: center;
+        // margin-top: .59rem;
+        //   justify-content: space-between;
+            >.huibox{
+                width: .9194rem;
+                
+                background: rgba(0,0,0,0.02);
+                
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 1.2275rem;
+                padding: .08rem .12rem;
+                margin-top: .075rem;
+                >span{
+                    // display: inline-block;
+                   font-size: .32rem;
+                   color: #d7dbde;
+                }
+            }
+            >.self-item{
+                width: 33.33333333333333%;
+                // display: inline-block;
+                >.img-content{
+                    width: 100%;
+                    padding: .08rem 10.714285714285715%;
+                    box-sizing: border-box;
+                    position: relative;
+                    >img{
+                        width: .9194rem;
+                        height: 1.2275rem;
+                    }
+                    .ant-checkbox-wrapper{
+                        position: absolute;
+                        right: .16rem;
+                        bottom: .07rem;
+                    }
+                }
+                >p{
+                        width: 100%;
+                        padding: 0 10.714285714285715%;
+                        position: relative;
+                        text-align: center;
+                        display: -webkit-box;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                }
+            }
+    }
+    >.tab-bar{
+       >ul{
+        width: 100%;
+        position: fixed;
+        min-height: .48rem;
+        bottom: 0;
+        background: #fff;
+        padding: 0 .16rem env(safe-area-inset-bottom);
+        box-sizing: border-box;
+        overflow: hidden;
+        display: flex;
+        z-index: 1000;
+        justify-content: space-between;
+        margin-bottom: 0;
+        align-items: center;
+        >li{
+            color: #23b383;
+            font-size: .14rem;
+            height: .48rem;
+            line-height: .48rem;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-family: PingFangSC-Medium;
+            min-width: 1.1433333333333333rem;
+        }
+       }
+    }
+}
+    

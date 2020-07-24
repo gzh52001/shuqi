@@ -1,39 +1,107 @@
-# shuqixiaoshuo
+# 书旗小说网
 
 #### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+
+* 官网：http://t.shuqi.com/
+* 移动端：http://203.195.139.74:3500
+* 小说管理系统：http://203.195.139.74
 
 #### 软件架构
-软件架构说明
+
+react  
+redux  
+mysql  
+node.js  
 
 
-#### 安装教程
+#### 目录结构
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+  .  
+  |-- README.md   
+  |-- node_modules  
+  |-- package.json  
+  |-- public    
+  |-- src  
+  |-- yarn-error.log  
+  `-- yarn.lock  
 
-#### 使用说明
+  3 directories, 5 files
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### 团队与分工
 
-#### 参与贡献
+##### 团队
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+* 组长：李铭航，成员：唐国绍,林桂林
+
+##### 负责模块说明
+
+* 林桂林
+  * 负责：小说管理系统前端页面实现
+  * 参与：小说管理系统后台接口设计，完成搜索、章节更新模块、评论管理模块接口
+  * 小说管理系统界面
+    ![小说管理](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEGvEOZj8AOVBnkCkFPlHRtFrMb48XT1ZlscIaFHR4f0rGn6AbJNLObLp0TvkD5Jcfo8wd6bDdtoKZWCkTtm.Fqc!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
+  * 新增小说
+    ![新增小说](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEEFy3hqlZg46vslwC1kz3DWWvKhDDEcvSt1BsqbX6KkU2I.17T.KO70ez*FMtRXrfqgaLIvBukrqw7D5F9ZIYBI!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
+  * 修改小说
+    ![修改小说](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEPf.qsKUpxQCAbDWVJET5FENDxG6CXP0ueDG7S.fkk1hr95L9QQlhCB5qJfOrBtiQ3c9FN9wL1Us9rMDuGAwZNM!/b&bo=gAepAwAAAAADJy8!&rf=viewer_4&t=5)
+  * 章节更新
+    ![章节更新](http://m.qpic.cn/psc?/V11b1aXr1KCcEK/TmEUgtj9EK6.7V8ajmQrEI3fbVGFjDRfyOHh9SvdRce0xPsZdqY84TGLlLvgbf97Uhhah3QK.TyXDHQu9pNIV9ibVBH7hPo*.9WiYJCAtcA!/b&bo=gAepAwAAAAADFx8!&rf=viewer_4&t=5)
+
+ 
+
+ * 李铭航 
+
+   * 负责：我的 分类 分类列表 登录 注册 书架  章节 页面 数据库 用户和书本接口
+   * 参与：小说管理系统后台接口设计，完成搜索完善
+   * 前端页面
+
+后端服务器
+
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163100_cc0c2fe6_7644835.png "psc.png")
 
 
-#### 码云特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163437_89a47b87_7644835.png "4.png")
+
+我的
+
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163706_212f6bf7_7644835.png "psc (1).png")
+
+登录页面
+
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163449_78f097ba_7644835.png "5.png")
+
+章节内容
+
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/163503_7a1fc3e5_7644835.png "6.png")
+
+
+ * 唐国绍
+
+   * 负责：主页详情页搜索评论
+   * 参与：书架完善 后台接口设计 数据库编写
+   * 前端页面
+   
+* 截图：
+ 首页
+
+![首页上](https://images.gitee.com/uploads/images/2020/0724/174823_506756b2_7644835.png "1.png")![首页下](https://images.gitee.com/uploads/images/2020/0724/174857_59b942a3_7644835.png "2.png")
+
+搜索页
+
+![搜索页](https://images.gitee.com/uploads/images/2020/0724/191609_e5249766_7644835.png "3.png")
+
+详情页
+
+![详情页上](https://images.gitee.com/uploads/images/2020/0724/191643_1205ad38_7644835.png "4.png")![详情页下](https://images.gitee.com/uploads/images/2020/0724/191656_72633eba_7644835.png "5.png")
+
+评论页
+
+![详情页](https://images.gitee.com/uploads/images/2020/0724/191824_f38747b9_7644835.png "在这里输入图片标题")
+
+写评论
+
+![写评论](https://images.gitee.com/uploads/images/2020/0724/191924_71013e64_7644835.png "7.png")
+
+
+   具体看视频 或 访问 http://203.195.139.74:3500/    http://203.195.139.74

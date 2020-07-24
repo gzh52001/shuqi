@@ -1,0 +1,86 @@
+.reg{
+    box-sizing: border-box;
+    padding: .2rem;
+    .regbox{
+        display: block;
+        .regtitle{
+            margin-bottom: .3rem;
+            display: flex;
+            justify-content: space-between;
+            >span{
+                margin-right: 1.5rem;
+                font-size: .16rem;
+                color: #404047;
+            }
+            >i{
+                font-size: .18rem;
+                color: #888;
+            }
+        }
+        >.username{
+            margin-bottom: .12rem;
+            >input{
+                width: 100%;
+                margin: 0;
+                box-sizing: border-box;
+                height: .44rem;
+                border-radius: .04rem;
+                padding: .12rem .13rem;
+                font-size: .14rem;
+                line-height: .20rem;
+                border: none;
+                outline: none;
+                color: #1d1e1f;
+                background-color: #f7f7fa;
+                background-image: none;
+            }
+        }
+        >.password{
+            margin-bottom: .12rem;
+            >input{
+                width: 100%;
+                margin: 0;
+                box-sizing: border-box;
+                height: .44rem;
+                border-radius: .04rem;
+                padding: .12rem .13rem;
+                font-size: .14rem;
+                line-height: .20rem;
+                border: none;
+                outline: none;
+                color: #1d1e1f;
+                background-color: #f7f7fa;
+                background-image: none;
+            }
+        }
+        >.btn{
+            margin-top: .12rem;
+            >.aa{
+                width: 100%;
+                padding: 0 .1rem;
+                font-size: .14rem;
+                line-height: .44rem;
+                background-color: #23b383;
+                color: #fff;
+                border-radius: .08rem;
+                text-align: center;
+                border: none;
+                outline: none;
+                opacity: 0.3;
+            }
+            >.bb{
+                width: 100%;
+                padding: 0 .1rem;
+                font-size: .14rem;
+                line-height: .44rem;
+                background-color: #23b383;
+                color: #fff;
+                border-radius: .08rem;
+                text-align: center;
+                border: none;
+                outline: none;
+                opacity: 1;
+            }
+        }
+    }
+}
