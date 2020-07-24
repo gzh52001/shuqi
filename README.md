@@ -6,15 +6,27 @@
 * 小说管理系统：http://203.195.139.74
 
 #### 软件架构
-react
-redux
-mysql
-node.js
+react  
+redux  
+mysql  
+node.js  
 
 
+#### 目录结构
+  .  
+  |-- README.md   
+  |-- node_modules  
+  |-- package.json  
+  |-- public    
+  |-- src  
+  |-- yarn-error.log  
+  `-- yarn.lock  
+
+  3 directories, 5 files
 #### 团队与分工
+##### 团队
 * 组长：李铭航，成员：唐国绍,林桂林
-* 负责模块说明
+##### 负责模块说明
 * 林桂林
   * 负责：小说管理系统前端页面实现
   * 参与：小说管理系统后台接口设计，完成搜索、章节更新模块、评论管理模块接口
