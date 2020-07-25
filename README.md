@@ -59,158 +59,158 @@ shuqi_webapp(移动)
 
 
 
-│  .gitignore
-│  config-overrides.js
-│  package-lock.json
-│  package.json
-│  README.md
-│  yarn-error.log
-│  yarn.lock
+│  .gitignore  
+│  config-overrides.js  
+│  package-lock.json  
+│  package.json  
+│  README.md  
+│  yarn-error.log  
+│  yarn.lock  
+│  
+├─config  
+│  │  env.js  
+│  │  getHttpsConfig.js  
+│  │  modules.js  
+│  │  paths.js  
+│  │  pnpTs.js  
+│  │  webpack.config.js  
+│  │  webpackDevServer.config.js  
+│  │  
+│  └─jest  
+│          cssTransform.js  
+│          fileTransform.js  
 │
-├─config
-│  │  env.js
-│  │  getHttpsConfig.js
-│  │  modules.js
-│  │  paths.js
-│  │  pnpTs.js
-│  │  webpack.config.js
-│  │  webpackDevServer.config.js
-│  │
-│  └─jest
-│          cssTransform.js
-│          fileTransform.js
-│
-├─public
-│      favicon.ico
-│      index.html
-│      logo192.png
-│      logo512.png
-│      manifest.json
-│      robots.txt
-│
-├─scripts
-│      build.js
-│      start.js
-│      test.js
-│
-└─src
-    │  App.css
-    │  App.js
-    │  index.js
-    │  setupProxy.js
-    │
-    ├─api
-    │      Cartlist.js
-    │      getBooklist.js
-    │      getList.js
-    │      homeApi.js
-    │      loginwreg.js
-    │      particularsApi.js
-    │      require.js
-    │      server.js
-    │      ZhangjieApi.js
-    │
-    ├─components
-    │  └─BottomNav
-    │          bottom.css
-    │          bottom.min.css
-    │          bottom.scss
-    │          index.jsx
-    │
-    ├─layout
-    │  └─PageLoyout
-    │          index.jsx
-    │
-    ├─pages
-    │  ├─Car
-    │  │      Cardetail.scss
-    │  │      index.jsx
-    │  │
-    │  ├─Choose
-    │  │      Choose.scss
-    │  │      index.jsx
-    │  │
-    │  ├─CommentArea
-    │  │      CommentArea.css
-    │  │      CommentArea.min.css
-    │  │      CommentArea.scss
-    │  │      index.js
-    │  │
-    │  ├─Detail
-    │  │      index.jsx
-    │  │      Particulars.scss
-    │  │
-    │  ├─Home
-    │  │      home.css
-    │  │      home.min.css
-    │  │      home.scss
-    │  │      index.jsx
-    │  │
-    │  ├─Login
-    │  │      index.jsx
-    │  │      login.scss
-    │  │
-    │  ├─Mine
-    │  │      index.jsx
-    │  │      lmhmine.scss
-    │  │
-    │  ├─Particulars
-    │  │      index.js
-    │  │      Particulars.css
-    │  │      Particulars.min.css
-    │  │      Particulars.scss
-    │  │
-    │  ├─Reg
-    │  │      index.jsx
-    │  │      reg.scss
-    │  │
-    │  ├─Search
-    │  │      index.jsx
-    │  │
-    │  ├─Searchs
-    │  │      Searchs.css
-    │  │      Searchs.js
-    │  │      Searchs.min.css
-    │  │      Searchs.scss
-    │  │
-    │  ├─Zhangjie
-    │  │      index.js
-    │  │      zhangjie.scss
-    │  │
-    │  ├─_404page
-    │  │      index.jsx
-    │  │
-    │  └─_ChooseDetail
-    │          ChooseD.scss
-    │          index.jsx
-    │
-    ├─Routes
-    │      index.jsx
-    │
-    ├─static
-    │  ├─css
-    │  │      common.css
-    │  │
-    │  ├─iconfont
-    │  │      demo.css
-    │  │      demo_index.html
-    │  │      iconfont.css
-    │  │      iconfont.eot
-    │  │      iconfont.js
-    │  │      iconfont.json
-    │  │      iconfont.svg
-    │  │      iconfont.ttf
-    │  │      iconfont.woff
-    │  │      iconfont.woff2
-    │  │
-    │  └─js
-    │          flexble.js
-    │
-    ├─store
-    │      index.js
-    │
-    └─utils
-            server.js
+├─public  
+│      favicon.ico  
+│      index.html  
+│      logo192.png  
+│      logo512.png  
+│      manifest.json  
+│      robots.txt  
+│  
+├─scripts  
+│      build.js  
+│      start.js  
+│      test.js  
+│  
+└─src  
+    │  App.css  
+    │  App.js  
+    │  index.js  
+    │  setupProxy.js  
+    │  
+    ├─api  
+    │      Cartlist.js  
+    │      getBooklist.js  
+    │      getList.js  
+    │      homeApi.js  
+    │      loginwreg.js  
+    │      particularsApi.js  
+    │      require.js  
+    │      server.js  
+    │      ZhangjieApi.js  
+    │  
+    ├─components  
+    │  └─BottomNav  
+    │          bottom.css  
+    │          bottom.min.css  
+    │          bottom.scss  
+    │          index.jsx  
+    │  
+    ├─layout  
+    │  └─PageLoyout  
+    │          index.jsx  
+    │  
+    ├─pages  
+    │  ├─Car  
+    │  │      Cardetail.scss  
+    │  │      index.jsx  
+    │  │  
+    │  ├─Choose  
+    │  │      Choose.scss  
+    │  │      index.jsx  
+    │  │  
+    │  ├─CommentArea  
+    │  │      CommentArea.css  
+    │  │      CommentArea.min.css  
+    │  │      CommentArea.scss  
+    │  │      index.js  
+    │  │  
+    │  ├─Detail  
+    │  │      index.jsx  
+    │  │      Particulars.scss  
+    │  │  
+    │  ├─Home  
+    │  │      home.css  
+    │  │      home.min.css  
+    │  │      home.scss  
+    │  │      index.jsx  
+    │  │  
+    │  ├─Login  
+    │  │      index.jsx  
+    │  │      login.scss  
+    │  │  
+    │  ├─Mine  
+    │  │      index.jsx  
+    │  │      lmhmine.scss  
+    │  │  
+    │  ├─Particulars  
+    │  │      index.js  
+    │  │      Particulars.css  
+    │  │      Particulars.min.css  
+    │  │      Particulars.scss  
+    │  │  
+    │  ├─Reg  
+    │  │      index.jsx  
+    │  │      reg.scss  
+    │  │  
+    │  ├─Search  
+    │  │      index.jsx  
+    │  │  
+    │  ├─Searchs  
+    │  │      Searchs.css  
+    │  │      Searchs.js  
+    │  │      Searchs.min.css  
+    │  │      Searchs.scss  
+    │  │  
+    │  ├─Zhangjie  
+    │  │      index.js  
+    │  │      zhangjie.scss  
+    │  │  
+    │  ├─_404page   
+    │  │      index.jsx  
+    │  │  
+    │  └─_ChooseDetail  
+    │          ChooseD.scss  
+    │          index.jsx  
+    │  
+    ├─Routes  
+    │      index.jsx  
+    │  
+    ├─static  
+    │  ├─css  
+    │  │      common.css  
+    │  │  
+    │  ├─iconfont  
+    │  │      demo.css  
+    │  │      demo_index.html  
+    │  │      iconfont.css  
+    │  │      iconfont.eot  
+    │  │      iconfont.js  
+    │  │      iconfont.json  
+    │  │      iconfont.svg  
+    │  │      iconfont.ttf  
+    │  │      iconfont.woff  
+    │  │      iconfont.woff2  
+    │  │  
+    │  └─js  
+    │          flexble.js  
+    │  
+    ├─store  
+    │      index.js  
+    │  
+    └─utils  
+            server.js  
 
 #### 团队与分工
 
